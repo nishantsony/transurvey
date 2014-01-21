@@ -20,11 +20,15 @@ Ext.Loader.setConfig({
 
 
 Ext.application({
+    models: [
+        'newVenue'
+    ],
     stores: [
         'FS'
     ],
     views: [
-        'MyPanel'
+        'MyPanel',
+        'addVenuePanel'
     ],
     controllers: [
         'MyController'

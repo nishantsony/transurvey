@@ -15,8 +15,8 @@
             },
             "viewportOrientation": "portrait"
         },
-        "urlPrefix": "",
-        "exportPath": "sftp:/115.146.86.216/arch",
+        "urlPrefix": "http://localhost/TranSafe_SArch/",
+        "exportPath": "/Applications/MAMP/htdocs",
         "spacesToIndent": 4,
         "sdkPath": "",
         "lineEnding": "LF",
@@ -27,7 +27,10 @@
         "lastBuildSelection": {
             "value": "webBuild",
             "display": "Build web app"
-        }
+        },
+        "displayfield-ExtBox1-1387-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1645-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1695-inputEl": "Not Installed"
     },
     "xdsVersion": "3.0.2",
     "xdsBuild": 1375,
@@ -38,7 +41,8 @@
         "view": [
             "407dbdf7-4c2d-4fcb-a2a5-e9c236cc6fca",
             "6f6512a8-2106-4983-b1cf-102c7371b9fd",
-            "22325f5e-c6c4-4e9a-9675-755cdb136a9c"
+            "22325f5e-c6c4-4e9a-9675-755cdb136a9c",
+            "b7ba1fa6-6778-43e0-a6b4-09767da752c8"
         ],
         "store": [
             "73fecb4d-dbdc-4b9b-9a7c-71100b0c50f9",
@@ -48,7 +52,8 @@
             "494abfff-6797-4594-ac9c-5f27f4940060"
         ],
         "model": [
-            "7a3ad55d-3735-4086-a315-4eb18f524388"
+            "7a3ad55d-3735-4086-a315-4eb18f524388",
+            "118080a4-f6a9-45f0-b48a-111167fcb3c3"
         ],
         "resource": [
             "6bcd9c33-278a-4c19-ad0d-9348bfd06878",

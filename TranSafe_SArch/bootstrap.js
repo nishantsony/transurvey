@@ -514,6 +514,17 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.layout.wrapper.BoxDock": [],
   "Ext.layout.wrapper.Dock": [],
   "Ext.layout.wrapper.Inner": [],
+  "Ext.log.Base": [],
+  "Ext.log.Logger": [],
+  "Ext.log.filter.Filter": [],
+  "Ext.log.filter.Priority": [],
+  "Ext.log.formatter.Default": [],
+  "Ext.log.formatter.Formatter": [],
+  "Ext.log.formatter.Identity": [],
+  "Ext.log.writer.Console": [],
+  "Ext.log.writer.DocumentTitle": [],
+  "Ext.log.writer.Remote": [],
+  "Ext.log.writer.Writer": [],
   "Ext.mixin.Bindable": [],
   "Ext.mixin.Filterable": [],
   "Ext.mixin.Mixin": [],
@@ -638,13 +649,15 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
+  "TranSafe.controller.MyController": [],
   "TranSafe.model.FSData": [],
   "TranSafe.store.FS": [],
   "TranSafe.store.FSData": [],
   "TranSafe.view.Main": [],
   "TranSafe.view.MyFormPanel": [],
   "TranSafe.view.MyNavigationView": [],
-  "TranSafe.view.MyPanel": []
+  "TranSafe.view.MyPanel": [],
+  "TranSafe.view.addVenuePanel": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1223,6 +1236,17 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.layout.wrapper.BoxDock": [],
   "Ext.layout.wrapper.Dock": [],
   "Ext.layout.wrapper.Inner": [],
+  "Ext.log.Base": [],
+  "Ext.log.Logger": [],
+  "Ext.log.filter.Filter": [],
+  "Ext.log.filter.Priority": [],
+  "Ext.log.formatter.Default": [],
+  "Ext.log.formatter.Formatter": [],
+  "Ext.log.formatter.Identity": [],
+  "Ext.log.writer.Console": [],
+  "Ext.log.writer.DocumentTitle": [],
+  "Ext.log.writer.Remote": [],
+  "Ext.log.writer.Writer": [],
   "Ext.mixin.Bindable": [],
   "Ext.mixin.Filterable": [],
   "Ext.mixin.Mixin": [],
@@ -1363,6 +1387,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
+  "TranSafe.controller.MyController": [],
   "TranSafe.model.FSData": [],
   "TranSafe.store.FS": [],
   "TranSafe.store.FSData": [],
@@ -1370,6 +1395,9 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.main"
   ],
   "TranSafe.view.MyFormPanel": [],
-  "TranSafe.view.MyNavigationView": [],
-  "TranSafe.view.MyPanel": []
+  "TranSafe.view.MyNavigationView": [
+    "widget.mynavigationview"
+  ],
+  "TranSafe.view.MyPanel": [],
+  "TranSafe.view.addVenuePanel": []
 });

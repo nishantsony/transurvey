@@ -32,44 +32,100 @@
             "designerId": "e119bd1d-cd5d-4120-a166-59a1c4942fcd"
         },
         {
-            "type": "Ext.Button",
+            "type": "Ext.Container",
             "reference": {
                 "name": "items",
                 "type": "array"
             },
             "codeClass": null,
             "userConfig": {
-                "designer|uiInterfaceName": "action-round",
-                "docked": "bottom",
-                "id": "start",
-                "text": "Continue",
-                "ui": "action-round"
+                "docked": "bottom"
             },
-            "designerId": "d589c18d-50f8-4a88-ac7d-8b00e71bbc16",
+            "designerId": "a279ca91-cf88-493f-8fb6-6767a54f516c",
             "cn": [
                 {
-                    "type": "fixedfunction",
+                    "type": "Ext.Button",
                     "reference": {
                         "name": "items",
                         "type": "array"
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "designer|params": [
-                            "button",
-                            "e"
-                        ],
-                        "fn": "handler",
-                        "implHandler": [
-                            "        //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));",
-                            "        Ext.Viewport.setActiveItem('mynavigationview',{",
-                            "                            type: \"slide\",",
-                            "                            direction: \"left\"",
-                            "                        });",
-                            ""
-                        ]
+                        "designer|uiInterfaceName": "action-round",
+                        "docked": "right",
+                        "id": "start",
+                        "text": "Continue",
+                        "ui": "action-round"
                     },
-                    "designerId": "a33bc0d8-9b44-41f0-aaf9-f8771d0884fd"
+                    "designerId": "d589c18d-50f8-4a88-ac7d-8b00e71bbc16",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "button",
+                                    "e"
+                                ],
+                                "fn": "handler",
+                                "implHandler": [
+                                    "        //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));",
+                                    "        Ext.Viewport.setActiveItem('mynavigationview',{",
+                                    "                            type: \"slide\",",
+                                    "                            direction: \"left\"",
+                                    "                        });",
+                                    ""
+                                ]
+                            },
+                            "designerId": "a33bc0d8-9b44-41f0-aaf9-f8771d0884fd"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "action-round",
+                        "docked": "left",
+                        "itemId": "addVenue",
+                        "text": "Add venue",
+                        "ui": "action-round"
+                    },
+                    "designerId": "083c2111-7220-4370-9094-33d9669a240a",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "button",
+                                    "e"
+                                ],
+                                "fn": "handler",
+                                "implHandler": [
+                                    "        //Ext.Viewport.add(Ext.create('TranSafe.view.addVenuePanel'));",
+                                    "        Ext.Viewport.setActiveItem('addvenuepanel',{",
+                                    "                            type: \"slide\",",
+                                    "                            direction: \"left\"",
+                                    "                        });",
+                                    ""
+                                ]
+                            },
+                            "designerId": "79401435-2ca4-4322-9590-bababa0517c3"
+                        }
+                    ]
                 }
             ]
         }

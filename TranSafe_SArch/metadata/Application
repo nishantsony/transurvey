@@ -9,12 +9,16 @@
         "controllers": [
             "MyController"
         ],
+        "models": [
+            "newVenue"
+        ],
         "name": "TranSafe",
         "stores": [
             "FS"
         ],
         "views": [
-            "MyPanel"
+            "MyPanel",
+            "addVenuePanel"
         ]
     },
     "designerId": "application"

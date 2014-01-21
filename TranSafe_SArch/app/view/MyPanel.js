@@ -18,6 +18,7 @@ Ext.define('TranSafe.view.MyPanel', {
 
     requires: [
         'Ext.Img',
+        'Ext.Container',
         'Ext.Button',
         'TranSafe.view.MyNavigationView'
     ],
@@ -32,19 +33,40 @@ Ext.define('TranSafe.view.MyPanel', {
                 src: 'transafe_logo.png'
             },
             {
-                xtype: 'button',
-                handler: function(button, e) {
-                    //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));
-                    Ext.Viewport.setActiveItem('mynavigationview',{
-                        type: "slide",
-                        direction: "left"
-                    });
-
-                },
+                xtype: 'container',
                 docked: 'bottom',
-                id: 'start',
-                ui: 'action-round',
-                text: 'Continue'
+                items: [
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));
+                            Ext.Viewport.setActiveItem('mynavigationview',{
+                                type: "slide",
+                                direction: "left"
+                            });
+
+                        },
+                        docked: 'right',
+                        id: 'start',
+                        ui: 'action-round',
+                        text: 'Continue'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            //Ext.Viewport.add(Ext.create('TranSafe.view.addVenuePanel'));
+                            Ext.Viewport.setActiveItem('addvenuepanel',{
+                                type: "slide",
+                                direction: "left"
+                            });
+
+                        },
+                        docked: 'left',
+                        itemId: 'addVenue',
+                        ui: 'action-round',
+                        text: 'Add venue'
+                    }
+                ]
             }
         ]
     }

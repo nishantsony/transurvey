@@ -1,0 +1,77 @@
+{
+    "type": "Ext.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "cls": [
+            "home"
+        ],
+        "designer|initialView": true,
+        "designer|userClassName": "MyPanel",
+        "html": "<h1>Welcome to TranSafe</h1><p>Synopsis</p><h2>TranSafe (0.0.1)</h2>",
+        "requires": [
+            "TranSafe.view.MyNavigationView"
+        ]
+    },
+    "designerId": "407dbdf7-4c2d-4fcb-a2a5-e9c236cc6fca",
+    "cn": [
+        {
+            "type": "Ext.Img",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 201,
+                "src": "transafe_logo.png"
+            },
+            "designerId": "e119bd1d-cd5d-4120-a166-59a1c4942fcd"
+        },
+        {
+            "type": "Ext.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|uiInterfaceName": "action-round",
+                "docked": "bottom",
+                "id": "start",
+                "text": "Continue",
+                "ui": "action-round"
+            },
+            "designerId": "d589c18d-50f8-4a88-ac7d-8b00e71bbc16",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|params": [
+                            "button",
+                            "e"
+                        ],
+                        "fn": "handler",
+                        "implHandler": [
+                            "        //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));",
+                            "        Ext.Viewport.setActiveItem('mynavigationview',{",
+                            "                            type: \"slide\",",
+                            "                            direction: \"left\"",
+                            "                        });",
+                            ""
+                        ]
+                    },
+                    "designerId": "a33bc0d8-9b44-41f0-aaf9-f8771d0884fd"
+                }
+            ]
+        }
+    ]
+}

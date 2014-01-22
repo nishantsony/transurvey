@@ -18,7 +18,8 @@
         ],
         "views": [
             "MyPanel",
-            "addVenuePanel"
+            "surveyPanel",
+            "MyNavigationView"
         ]
     },
     "designerId": "application"

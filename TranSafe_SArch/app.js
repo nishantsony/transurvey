@@ -28,7 +28,8 @@ Ext.application({
     ],
     views: [
         'MyPanel',
-        'addVenuePanel'
+        'surveyPanel',
+        'MyNavigationView'
     ],
     controllers: [
         'MyController'

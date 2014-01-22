@@ -15,7 +15,7 @@
             },
             "viewportOrientation": "portrait"
         },
-        "urlPrefix": "http://localhost/TranSafe_SArch/",
+        "urlPrefix": "http://localhost/",
         "exportPath": "/Applications/MAMP/htdocs",
         "spacesToIndent": 4,
         "sdkPath": "",
@@ -30,7 +30,9 @@
         },
         "displayfield-ExtBox1-1387-inputEl": "Not Installed",
         "displayfield-ExtBox1-1645-inputEl": "Not Installed",
-        "displayfield-ExtBox1-1695-inputEl": "Not Installed"
+        "displayfield-ExtBox1-1695-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1332-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1432-inputEl": "Not Installed"
     },
     "xdsVersion": "3.0.2",
     "xdsBuild": 1375,

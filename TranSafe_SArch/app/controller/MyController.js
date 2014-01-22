@@ -17,5 +17,27 @@ Ext.define('TranSafe.controller.MyController', {
     extend: 'Ext.app.Controller',
 
     config: {
+        views: [
+            'surveyPanel'
+        ],
+
+        refs: {
+            surveyVenueLabel: 'surveyPanel'
+        },
+
+        control: {
+            "list": {
+                itemtap: 'onListItemTap'
+            }
+        }
+    },
+
+    onListItemTap: function(dataview, index, target, record, e, eOpts) {
+        console.log(record.get('name'));
+         Ext.Viewport.setActiveItem('surveypanel',{
+                                    type: "slide",
+                                    direction: "left"
+                                });
     }
+
 });

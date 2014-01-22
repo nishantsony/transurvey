@@ -6,7 +6,47 @@
     },
     "codeClass": null,
     "userConfig": {
-        "designer|userClassName": "MyController"
+        "designer|userClassName": "MyController",
+        "views": [
+            "surveyPanel"
+        ]
     },
-    "designerId": "494abfff-6797-4594-ac9c-5f27f4940060"
+    "designerId": "494abfff-6797-4594-ac9c-5f27f4940060",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "list",
+                "designer|targetType": "Ext.dataview.List",
+                "fn": "onListItemTap",
+                "implHandler": [
+                    "console.log(record.get('name'));",
+                    " Ext.Viewport.setActiveItem('surveypanel',{",
+                    "                            type: \"slide\",",
+                    "                            direction: \"left\"",
+                    "                        });"
+                ],
+                "name": "itemtap"
+            },
+            "designerId": "3cf11938-aa73-4e02-88a7-ba464d8b014d"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "surveyVenueLabel",
+                "selector": "surveyPanel"
+            },
+            "designerId": "43c75987-2cb2-4241-88de-a8de847e6ac3"
+        }
+    ]
 }

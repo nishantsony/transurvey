@@ -55,7 +55,7 @@ Ext.define('TranSafe.view.MyPanel', {
                         xtype: 'button',
                         handler: function(button, e) {
                             //Ext.Viewport.add(Ext.create('TranSafe.view.addVenuePanel'));
-                            Ext.Viewport.setActiveItem('addvenuepanel',{
+                            Ext.Viewport.setActiveItem('surveypanel',{
                                 type: "slide",
                                 direction: "left"
                             });

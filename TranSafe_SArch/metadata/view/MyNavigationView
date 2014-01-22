@@ -53,6 +53,7 @@
                 "docked": null,
                 "grouped": true,
                 "hideOnMaskTap": false,
+                "itemId": "mylist",
                 "store": "FS",
                 "title": "Locations NearBy"
             },

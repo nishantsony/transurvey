@@ -44,6 +44,7 @@ Ext.define('TranSafe.view.MyNavigationView', {
             {
                 xtype: 'list',
                 title: 'Locations NearBy',
+                itemId: 'mylist',
                 hideOnMaskTap: false,
                 allowDeselect: true,
                 itemTpl: [

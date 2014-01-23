@@ -44,26 +44,28 @@ Ext.define('TranSafe.view.surveyPanel', {
                                 docked: 'left',
                                 height: 70,
                                 width: 50,
-                                src: 'Emoticons/emotion_happy.jpg'
+                                src: 'Emoticons/emotion_sad.jpg'
                             },
                             {
                                 xtype: 'image',
                                 docked: 'right',
                                 height: 70,
                                 width: 50,
-                                src: 'Emoticons/emotion_sad.jpg'
+                                src: 'Emoticons/emotion_happy.jpg'
                             },
                             {
                                 xtype: 'sliderfield',
                                 docked: 'top',
+                                id: 'sliderHappySad',
                                 width: '',
                                 clearIcon: false,
                                 label: '',
                                 labelAlign: 'top',
                                 value: [
-                                    5
+                                    0
                                 ],
-                                maxValue: 10
+                                maxValue: 5,
+                                minValue: -5
                             }
                         ]
                     },
@@ -73,14 +75,14 @@ Ext.define('TranSafe.view.surveyPanel', {
                         items: [
                             {
                                 xtype: 'image',
-                                docked: 'left',
+                                docked: 'right',
                                 height: 70,
                                 width: 50,
                                 src: 'Emoticons/emotion_excited.jpg'
                             },
                             {
                                 xtype: 'image',
-                                docked: 'right',
+                                docked: 'left',
                                 height: 70,
                                 width: 48,
                                 src: 'Emoticons/emotion_bored.jpg'
@@ -88,14 +90,16 @@ Ext.define('TranSafe.view.surveyPanel', {
                             {
                                 xtype: 'sliderfield',
                                 docked: 'top',
+                                id: 'sliderExcitedBored',
                                 width: '',
                                 clearIcon: false,
                                 label: '',
                                 labelAlign: 'top',
                                 value: [
-                                    5
+                                    0
                                 ],
-                                maxValue: 10
+                                maxValue: 5,
+                                minValue: -5
                             }
                         ]
                     },
@@ -104,14 +108,14 @@ Ext.define('TranSafe.view.surveyPanel', {
                         items: [
                             {
                                 xtype: 'image',
-                                docked: 'left',
+                                docked: 'right',
                                 height: 70,
                                 width: 50,
                                 src: 'Emoticons/emotion_safe.jpg'
                             },
                             {
                                 xtype: 'image',
-                                docked: 'right',
+                                docked: 'left',
                                 height: 70,
                                 width: 48,
                                 src: 'Emoticons/emotion_scared.jpg'
@@ -119,14 +123,16 @@ Ext.define('TranSafe.view.surveyPanel', {
                             {
                                 xtype: 'sliderfield',
                                 docked: 'top',
+                                id: 'sliderSafeScared',
                                 width: '',
                                 clearIcon: false,
                                 label: '',
                                 labelAlign: 'top',
                                 value: [
-                                    5
+                                    0
                                 ],
-                                maxValue: 10
+                                maxValue: 5,
+                                minValue: -5
                             }
                         ]
                     },
@@ -135,14 +141,14 @@ Ext.define('TranSafe.view.surveyPanel', {
                         items: [
                             {
                                 xtype: 'image',
-                                docked: 'left',
+                                docked: 'right',
                                 height: 70,
                                 width: 50,
                                 src: 'Emoticons/emotion_peaceful.jpg'
                             },
                             {
                                 xtype: 'image',
-                                docked: 'right',
+                                docked: 'left',
                                 height: 70,
                                 width: 48,
                                 src: 'Emoticons/emotion_angry.jpg'
@@ -150,14 +156,16 @@ Ext.define('TranSafe.view.surveyPanel', {
                             {
                                 xtype: 'sliderfield',
                                 docked: 'top',
+                                id: 'sliderPeacefulAngry',
                                 width: '',
                                 clearIcon: false,
                                 label: '',
                                 labelAlign: 'top',
                                 value: [
-                                    5
+                                    0
                                 ],
-                                maxValue: 10
+                                maxValue: 5,
+                                minValue: -5
                             }
                         ]
                     },
@@ -169,8 +177,30 @@ Ext.define('TranSafe.view.surveyPanel', {
             {
                 xtype: 'button',
                 handler: function(button, e) {
+                    var currentdate = new Date();
+                    var timestamp = currentdate.getFullYear() + "-"+(currentdate.getMonth()+1)  + "-" + currentdate.getDate() + "%20"  + currentdate.getHours() + "-"  + currentdate.getMinutes() + "-" + currentdate.getSeconds();
+                    var chosenVenue = Ext.getCmp('venueLblSurvey').getHtml();
+                    /*	getting feelings' values.
+                    *	if < 0 this is a negative feeling Sad rather than Happy, Angry rather than Peacful etc.
+                    *	for this we calculate |val| and store it in an array along with all the others.
+                    *	if = 0 this is neutral
+                    *	if > 0 this is a positive feeling
+                    */
+                    var tempFeelingArray = new Array();
+                    tempFeelingArray.push(Ext.getCmp('sliderHappySad').getValue()[0]);
+                    tempFeelingArray.push(Ext.getCmp('sliderExcitedBored').getValue()[0]);
+                    tempFeelingArray.push(Ext.getCmp('sliderSafeScared').getValue()[0]);
+                    tempFeelingArray.push(Ext.getCmp('sliderPeacefulAngry').getValue()[0]);
+                    var feelingsValues = new Array();
+                    console.log(tempFeelingArray);
+                    for(var i = 0; i < 4; i++){
+                        feelingsValues=setFeelings(feelingsValues, tempFeelingArray[i]);
+                    }
+                    console.log(feelingsValues);
                     Ext.Ajax.request({
-                        url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SumTypeOfFeeling?location=location1',
+                        url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails?survey='+timestamp+'{=|||||||||=}survey='+chosenVenue+'{=|||||||||=}feeling='+HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX]+'{=|||||||||=}feeling='+SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX]+'{=|||||||||=}feeling='+EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX]+'{=|||||||||=}feeling='+BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX]+'{=|||||||||=}feeling='+SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX]+'{=|||||||||=}feeling='+SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX]+'{=|||||||||=}feeling='+PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX]+'{=|||||||||=}feeling='+ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX]+'',
+                        //    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',
+                        method: 'GET',
                         success: function (response, options) { console.log(response); },
                         failure: function (response, options) { console.log('no!');}
                     });

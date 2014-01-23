@@ -6,10 +6,7 @@
     },
     "codeClass": null,
     "userConfig": {
-        "designer|userClassName": "MyController",
-        "views": [
-            "surveyPanel"
-        ]
+        "designer|userClassName": "MyController"
     },
     "designerId": "494abfff-6797-4594-ac9c-5f27f4940060",
     "cn": [
@@ -29,7 +26,8 @@
                     " Ext.Viewport.setActiveItem('surveypanel',{",
                     "                            type: \"slide\",",
                     "                            direction: \"left\"",
-                    "                        });"
+                    "                        });",
+                    "console.log(this.getVenueLblSurvey().setHtml(record.get('name')));"
                 ],
                 "name": "itemtap"
             },
@@ -43,10 +41,23 @@
             },
             "codeClass": null,
             "userConfig": {
-                "ref": "surveyVenueLabel",
-                "selector": "surveyPanel"
+                "ref": "venueLblSurvey",
+                "selector": "label#venueLblSurvey"
             },
-            "designerId": "43c75987-2cb2-4241-88de-a8de847e6ac3"
+            "designerId": "836d9eb8-0e3a-4420-91cc-f4952cb7e58b"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "surveyPanel",
+                "selector": "panel#mypanel1"
+            },
+            "designerId": "65c3e78e-8ac9-4979-b897-5a68da380340"
         }
     ]
 }

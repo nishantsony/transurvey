@@ -18,6 +18,9 @@
       },
       {
          "path": "test.js"
+      },
+      {
+         "path": "Feelings.js"
       }
    ],
    "css": [

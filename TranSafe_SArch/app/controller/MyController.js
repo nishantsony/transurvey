@@ -17,12 +17,9 @@ Ext.define('TranSafe.controller.MyController', {
     extend: 'Ext.app.Controller',
 
     config: {
-        views: [
-            'surveyPanel'
-        ],
-
         refs: {
-            surveyVenueLabel: 'surveyPanel'
+            venueLblSurvey: 'label#venueLblSurvey',
+            surveyPanel: 'panel#mypanel1'
         },
 
         control: {
@@ -38,6 +35,7 @@ Ext.define('TranSafe.controller.MyController', {
                                     type: "slide",
                                     direction: "left"
                                 });
+        console.log(this.getVenueLblSurvey().setHtml(record.get('name')));
     }
 
 });

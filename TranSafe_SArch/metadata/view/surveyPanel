@@ -13,6 +13,102 @@
     "designerId": "b7ba1fa6-6778-43e0-a6b4-09767da752c8",
     "cn": [
         {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "docked": "top"
+            },
+            "designerId": "283506ad-1a1a-49a1-b775-459087cc2050",
+            "cn": [
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "action-round",
+                        "docked": "right",
+                        "text": "sign up",
+                        "ui": "action-round"
+                    },
+                    "designerId": "a8b85dc4-e270-42f7-9a06-0cd185337a2d",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "button",
+                                    "e"
+                                ],
+                                "fn": "handler",
+                                "implHandler": [
+                                    "        //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));",
+                                    "        Ext.Viewport.setActiveItem('signuppanel',{",
+                                    "                            type: \"slide\",",
+                                    "                            direction: \"left\"",
+                                    "                        });",
+                                    ""
+                                ]
+                            },
+                            "designerId": "fadd8e9b-1da8-4d20-9d65-5e774449a92a"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "action-round",
+                        "docked": "right",
+                        "text": "Sign in",
+                        "ui": "action-round"
+                    },
+                    "designerId": "9b12be6f-d090-4c74-b672-d56657beb0f5",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "button",
+                                    "e"
+                                ],
+                                "fn": "handler",
+                                "implHandler": [
+                                    "        //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));",
+                                    "        Ext.Viewport.setActiveItem('signinpanel',{",
+                                    "                            type: \"slide\",",
+                                    "                            direction: \"left\"",
+                                    "                        });",
+                                    ""
+                                ]
+                            },
+                            "designerId": "6e52f4c3-6f12-4d6b-8e70-5b6901990852"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "type": "Ext.Label",
             "reference": {
                 "name": "items",
@@ -20,6 +116,7 @@
             },
             "codeClass": null,
             "userConfig": {
+                "docked": "top",
                 "html": "Venue: ",
                 "id": "venueLblSurvey"
             },
@@ -32,6 +129,9 @@
                 "type": "array"
             },
             "codeClass": null,
+            "userConfig": {
+                "docked": "top"
+            },
             "designerId": "707a60eb-6916-4fd1-a186-408ac011d2be",
             "cn": [
                 {
@@ -304,65 +404,79 @@
             ]
         },
         {
-            "type": "Ext.Button",
+            "type": "Ext.Container",
             "reference": {
                 "name": "items",
                 "type": "array"
             },
             "codeClass": null,
             "userConfig": {
-                "designer|uiInterfaceName": "action-round",
-                "docked": "bottom",
-                "itemId": "mybutton2",
-                "text": "Send to web service",
-                "ui": "action-round"
+                "docked": "bottom"
             },
-            "designerId": "3e3111d9-7da6-4076-bca7-ccb31de46e5c",
+            "designerId": "04f6f95c-0538-4e9b-bfce-f89e24f61cbe",
             "cn": [
                 {
-                    "type": "fixedfunction",
+                    "type": "Ext.Button",
                     "reference": {
                         "name": "items",
                         "type": "array"
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "designer|params": [
-                            "button",
-                            "e"
-                        ],
-                        "fn": "handler",
-                        "implHandler": [
-                            "var currentdate = new Date();",
-                            "var timestamp = currentdate.getFullYear() + \"-\"+(currentdate.getMonth()+1)  + \"-\" + currentdate.getDate() + \"%20\"  + currentdate.getHours() + \"-\"  + currentdate.getMinutes() + \"-\" + currentdate.getSeconds();",
-                            "var chosenVenue = Ext.getCmp('venueLblSurvey').getHtml();",
-                            "/*\tgetting feelings' values.",
-                            "*\tif < 0 this is a negative feeling Sad rather than Happy, Angry rather than Peacful etc.",
-                            "*\tfor this we calculate |val| and store it in an array along with all the others.",
-                            "*\tif = 0 this is neutral",
-                            "*\tif > 0 this is a positive feeling",
-                            "*/",
-                            "var tempFeelingArray = new Array();",
-                            "tempFeelingArray.push(Ext.getCmp('sliderHappySad').getValue()[0]);",
-                            "tempFeelingArray.push(Ext.getCmp('sliderExcitedBored').getValue()[0]);",
-                            "tempFeelingArray.push(Ext.getCmp('sliderSafeScared').getValue()[0]);",
-                            "tempFeelingArray.push(Ext.getCmp('sliderPeacefulAngry').getValue()[0]);",
-                            "var feelingsValues = new Array();",
-                            "console.log(tempFeelingArray);",
-                            "for(var i = 0; i < 4; i++){",
-                            "    feelingsValues=setFeelings(feelingsValues, tempFeelingArray[i]);",
-                            "}",
-                            "console.log(feelingsValues);",
-                            "Ext.Ajax.request({",
-                            "    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails?survey='+timestamp+'{=|||||||||=}survey='+chosenVenue+'{=|||||||||=}feeling='+HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX]+'{=|||||||||=}feeling='+SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX]+'{=|||||||||=}feeling='+EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX]+'{=|||||||||=}feeling='+BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX]+'{=|||||||||=}feeling='+SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX]+'{=|||||||||=}feeling='+SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX]+'{=|||||||||=}feeling='+PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX]+'{=|||||||||=}feeling='+ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX]+'',",
-                            "//    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',",
-                            "    method: 'GET',",
-                            "    success: function (response, options) { console.log(response); },",
-                            "    failure: function (response, options) { console.log('no!');}",
-                            " });"
-                        ]
+                        "designer|uiInterfaceName": "action-round",
+                        "docked": "bottom",
+                        "itemId": "mybutton2",
+                        "text": "Submit",
+                        "ui": "action-round"
                     },
-                    "designerId": "88fa7ff4-1c6f-4c5a-b22f-e8c6ec4e9ae6"
+                    "designerId": "3e3111d9-7da6-4076-bca7-ccb31de46e5c",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "button",
+                                    "e"
+                                ],
+                                "fn": "handler",
+                                "implHandler": [
+                                    "var currentdate = new Date();",
+                                    "var timestamp = currentdate.getFullYear() + \"-\"+(currentdate.getMonth()+1)  + \"-\" + currentdate.getDate() + \"%20\"  + currentdate.getHours() + \"-\"  + currentdate.getMinutes() + \"-\" + currentdate.getSeconds();",
+                                    "var chosenVenue = Ext.getCmp('venueLblSurvey').getHtml();",
+                                    "/*\tgetting feelings' values.",
+                                    "*\tif < 0 this is a negative feeling Sad rather than Happy, Angry rather than Peacful etc.",
+                                    "*\tfor this we calculate |val| and store it in an array along with all the others.",
+                                    "*\tif = 0 this is neutral",
+                                    "*\tif > 0 this is a positive feeling",
+                                    "*/",
+                                    "var tempFeelingArray = new Array();",
+                                    "tempFeelingArray.push(Ext.getCmp('sliderHappySad').getValue()[0]);",
+                                    "tempFeelingArray.push(Ext.getCmp('sliderExcitedBored').getValue()[0]);",
+                                    "tempFeelingArray.push(Ext.getCmp('sliderSafeScared').getValue()[0]);",
+                                    "tempFeelingArray.push(Ext.getCmp('sliderPeacefulAngry').getValue()[0]);",
+                                    "var feelingsValues = new Array();",
+                                    "console.log(tempFeelingArray);",
+                                    "for(var i = 0; i < 4; i++){",
+                                    "    feelingsValues=setFeelings(feelingsValues, tempFeelingArray[i]);",
+                                    "}",
+                                    "console.log(feelingsValues);",
+                                    "Ext.Ajax.request({",
+                                    "    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails?survey='+timestamp+'{=|||||||||=}survey='+chosenVenue+'{=|||||||||=}feeling='+HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX]+'{=|||||||||=}feeling='+SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX]+'{=|||||||||=}feeling='+EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX]+'{=|||||||||=}feeling='+BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX]+'{=|||||||||=}feeling='+SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX]+'{=|||||||||=}feeling='+SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX]+'{=|||||||||=}feeling='+PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX]+'{=|||||||||=}feeling='+ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX]+'',",
+                                    "//    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',",
+                                    "    method: 'GET',",
+                                    "    success: function (response, options) { console.log(response); },",
+                                    "    failure: function (response, options) { console.log('no!');}",
+                                    " });"
+                                ]
+                            },
+                            "designerId": "88fa7ff4-1c6f-4c5a-b22f-e8c6ec4e9ae6"
+                        }
+                    ]
                 }
             ]
         }

@@ -18,22 +18,58 @@ Ext.define('TranSafe.view.surveyPanel', {
     alias: 'widget.surveypanel',
 
     requires: [
-        'Ext.Label',
         'Ext.Container',
+        'Ext.Button',
+        'Ext.Label',
         'Ext.Img',
-        'Ext.field.Slider',
-        'Ext.Button'
+        'Ext.field.Slider'
     ],
 
     config: {
         items: [
             {
+                xtype: 'container',
+                docked: 'top',
+                items: [
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));
+                            Ext.Viewport.setActiveItem('signuppanel',{
+                                type: "slide",
+                                direction: "left"
+                            });
+
+                        },
+                        docked: 'right',
+                        ui: 'action-round',
+                        text: 'sign up'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));
+                            Ext.Viewport.setActiveItem('signinpanel',{
+                                type: "slide",
+                                direction: "left"
+                            });
+
+                        },
+                        docked: 'right',
+                        ui: 'action-round',
+                        text: 'Sign in'
+                    }
+                ]
+            },
+            {
                 xtype: 'label',
+                docked: 'top',
                 html: 'Venue: ',
                 id: 'venueLblSurvey'
             },
             {
                 xtype: 'container',
+                docked: 'top',
                 items: [
                     {
                         xtype: 'container',
@@ -175,40 +211,46 @@ Ext.define('TranSafe.view.surveyPanel', {
                 ]
             },
             {
-                xtype: 'button',
-                handler: function(button, e) {
-                    var currentdate = new Date();
-                    var timestamp = currentdate.getFullYear() + "-"+(currentdate.getMonth()+1)  + "-" + currentdate.getDate() + "%20"  + currentdate.getHours() + "-"  + currentdate.getMinutes() + "-" + currentdate.getSeconds();
-                    var chosenVenue = Ext.getCmp('venueLblSurvey').getHtml();
-                    /*	getting feelings' values.
-                    *	if < 0 this is a negative feeling Sad rather than Happy, Angry rather than Peacful etc.
-                    *	for this we calculate |val| and store it in an array along with all the others.
-                    *	if = 0 this is neutral
-                    *	if > 0 this is a positive feeling
-                    */
-                    var tempFeelingArray = new Array();
-                    tempFeelingArray.push(Ext.getCmp('sliderHappySad').getValue()[0]);
-                    tempFeelingArray.push(Ext.getCmp('sliderExcitedBored').getValue()[0]);
-                    tempFeelingArray.push(Ext.getCmp('sliderSafeScared').getValue()[0]);
-                    tempFeelingArray.push(Ext.getCmp('sliderPeacefulAngry').getValue()[0]);
-                    var feelingsValues = new Array();
-                    console.log(tempFeelingArray);
-                    for(var i = 0; i < 4; i++){
-                        feelingsValues=setFeelings(feelingsValues, tempFeelingArray[i]);
-                    }
-                    console.log(feelingsValues);
-                    Ext.Ajax.request({
-                        url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails?survey='+timestamp+'{=|||||||||=}survey='+chosenVenue+'{=|||||||||=}feeling='+HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX]+'{=|||||||||=}feeling='+SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX]+'{=|||||||||=}feeling='+EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX]+'{=|||||||||=}feeling='+BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX]+'{=|||||||||=}feeling='+SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX]+'{=|||||||||=}feeling='+SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX]+'{=|||||||||=}feeling='+PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX]+'{=|||||||||=}feeling='+ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX]+'',
-                        //    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',
-                        method: 'GET',
-                        success: function (response, options) { console.log(response); },
-                        failure: function (response, options) { console.log('no!');}
-                    });
-                },
+                xtype: 'container',
                 docked: 'bottom',
-                itemId: 'mybutton2',
-                ui: 'action-round',
-                text: 'Send to web service'
+                items: [
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var currentdate = new Date();
+                            var timestamp = currentdate.getFullYear() + "-"+(currentdate.getMonth()+1)  + "-" + currentdate.getDate() + "%20"  + currentdate.getHours() + "-"  + currentdate.getMinutes() + "-" + currentdate.getSeconds();
+                            var chosenVenue = Ext.getCmp('venueLblSurvey').getHtml();
+                            /*	getting feelings' values.
+                            *	if < 0 this is a negative feeling Sad rather than Happy, Angry rather than Peacful etc.
+                            *	for this we calculate |val| and store it in an array along with all the others.
+                            *	if = 0 this is neutral
+                            *	if > 0 this is a positive feeling
+                            */
+                            var tempFeelingArray = new Array();
+                            tempFeelingArray.push(Ext.getCmp('sliderHappySad').getValue()[0]);
+                            tempFeelingArray.push(Ext.getCmp('sliderExcitedBored').getValue()[0]);
+                            tempFeelingArray.push(Ext.getCmp('sliderSafeScared').getValue()[0]);
+                            tempFeelingArray.push(Ext.getCmp('sliderPeacefulAngry').getValue()[0]);
+                            var feelingsValues = new Array();
+                            console.log(tempFeelingArray);
+                            for(var i = 0; i < 4; i++){
+                                feelingsValues=setFeelings(feelingsValues, tempFeelingArray[i]);
+                            }
+                            console.log(feelingsValues);
+                            Ext.Ajax.request({
+                                url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails?survey='+timestamp+'{=|||||||||=}survey='+chosenVenue+'{=|||||||||=}feeling='+HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX]+'{=|||||||||=}feeling='+SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX]+'{=|||||||||=}feeling='+EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX]+'{=|||||||||=}feeling='+BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX]+'{=|||||||||=}feeling='+SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX]+'{=|||||||||=}feeling='+SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX]+'{=|||||||||=}feeling='+PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX]+'{=|||||||||=}feeling='+ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX]+'',
+                                //    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',
+                                method: 'GET',
+                                success: function (response, options) { console.log(response); },
+                                failure: function (response, options) { console.log('no!');}
+                            });
+                        },
+                        docked: 'bottom',
+                        itemId: 'mybutton2',
+                        ui: 'action-round',
+                        text: 'Submit'
+                    }
+                ]
             }
         ]
     }

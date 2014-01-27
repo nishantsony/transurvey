@@ -29,7 +29,9 @@ Ext.application({
     views: [
         'MyPanel',
         'surveyPanel',
-        'MyNavigationView'
+        'MyNavigationView',
+        'SignUpPanel',
+        'SignInPanel'
     ],
     controllers: [
         'MyController'

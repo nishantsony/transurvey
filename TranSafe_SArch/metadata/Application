@@ -19,7 +19,9 @@
         "views": [
             "MyPanel",
             "surveyPanel",
-            "MyNavigationView"
+            "MyNavigationView",
+            "SignUpPanel",
+            "SignInPanel"
         ]
     },
     "designerId": "application"

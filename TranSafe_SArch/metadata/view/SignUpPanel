@@ -8,7 +8,8 @@
     "userConfig": {
         "designer|userAlias": "signuppanel",
         "designer|userClassName": "SignUpPanel",
-        "id": "signinpanel"
+        "id": "signinpanel",
+        "style": "background-color: #FFF"
     },
     "designerId": "84a0048a-1dd5-4977-a25f-8ec8d96cd0a4",
     "cn": [
@@ -33,10 +34,11 @@
             },
             "codeClass": null,
             "userConfig": {
+                "border": 1,
                 "id": "signUpUsernameField",
-                "label": "Username",
-                "labelAlign": "right",
-                "labelWidth": "35%"
+                "label": "Login",
+                "padding": null,
+                "style": "'border-color: blue; border-style: solid;',"
             },
             "designerId": "6778d2c3-9c6a-44dd-9973-580ded487d19"
         },
@@ -48,10 +50,12 @@
             },
             "codeClass": null,
             "userConfig": {
+                "border": 1,
                 "id": "signUpPasswordField",
                 "label": "Password",
-                "labelAlign": "right",
-                "labelWidth": "35%"
+                "labelAlign": null,
+                "padding": null,
+                "style": "'border-color: blue; border-style: solid;',"
             },
             "designerId": "f2120c8c-e878-466a-939c-3540483768e4"
         },
@@ -75,9 +79,11 @@
             },
             "codeClass": null,
             "userConfig": {
+                "border": 1,
                 "id": "emailField",
                 "label": "Email",
-                "labelWidth": "40%"
+                "padding": "",
+                "style": "'border-color: blue; border-style: solid;'"
             },
             "designerId": "7af4c42b-d1b3-429a-a588-39c21d0de424"
         },
@@ -100,7 +106,9 @@
                     "userConfig": {
                         "docked": "left",
                         "label": "Male",
+                        "labelAlign": null,
                         "labelWidth": "60%",
+                        "minWidth": "50%",
                         "name": "gender",
                         "value": "male"
                     },
@@ -118,7 +126,9 @@
                         "docked": "right",
                         "label": "Female",
                         "labelAlign": "right",
-                        "labelWidth": "60%",
+                        "labelWidth": "40%",
+                        "labelWrap": true,
+                        "minWidth": "50%",
                         "name": "gender",
                         "value": "female"
                     },
@@ -134,10 +144,12 @@
             },
             "codeClass": null,
             "userConfig": {
+                "border": 1,
                 "designer|uiInterfaceName": "number",
                 "id": "ageField",
                 "label": "Age",
-                "labelWidth": "40%",
+                "padding": "",
+                "style": "'border-color: blue; border-style: solid;',",
                 "ui": "number"
             },
             "designerId": "7fdbe8d5-afdb-4e2f-86b1-fb3c59768b6e"
@@ -150,9 +162,11 @@
             },
             "codeClass": null,
             "userConfig": {
+                "border": 1,
                 "id": "occupationField",
-                "label": "Occupation",
-                "labelWidth": "40%"
+                "label": "Role",
+                "padding": null,
+                "style": "'border-color: blue; border-style: solid;',"
             },
             "designerId": "e6f4f1ce-4f21-42e0-b9e1-76f25f3f7df3"
         },
@@ -185,12 +199,45 @@
                         ],
                         "fn": "handler",
                         "implHandler": [
-                            "console.log('Username: ' + Ext.getCmp('signUpUsernameField').getValue());",
-                            "console.log('Password: ' + Ext.getCmp('signUpPasswordField').getValue());",
-                            "console.log('email: ' + Ext.getCmp('emailField').getValue());",
-                            "console.log('age: ' + Ext.getCmp('ageField').getValue());",
-                            "console.log('occupation: ' + Ext.getCmp('occupationField').getValue());",
-                            "console.log('gender: ' + Ext.ComponentQuery.query('radiofield[name=gender]'));",
+                            "var login = Ext.getCmp('signUpUsernameField').getValue();",
+                            "var pass = Ext.getCmp('signUpPasswordField').getValue();",
+                            "var email = Ext.getCmp('emailField').getValue();",
+                            "var gender = Ext.ComponentQuery.query('radiofield[name=gender]')[0].getGroupValue();",
+                            "var age = Ext.getCmp('ageField').getValue();",
+                            "var role = Ext.getCmp('occupationField').getValue();",
+                            "console.log('Username: ' + login);",
+                            "console.log('Password: ' + pass);",
+                            "console.log('email: ' + email);",
+                            "console.log('age: ' + age);",
+                            "console.log('occupation: ' + role);",
+                            "console.log('gender: ' + gender);",
+                            "",
+                            "Ext.data.JsonP.request({",
+                            "",
+                            "     url: 'http://115.146.86.216:8080/TransNet/services/SurveyBO/CreateUser',",
+                            "     params: {",
+                            "         format: 'json',",
+                            "         response: 'application/jsonp',",
+                            "         userdetails: login,",
+                            "         userdetails: pass,",
+                            "         userdetails: email,",
+                            "         userdetails: gender,",
+                            "         userdetails: age,",
+                            "         userdetails: role",
+                            "             },",
+                            "     callbackKey: 'callback',",
+                            "                    success: function (response) {",
+                            "                        alert('Working!');",
+                            "                        console.log(response);",
+                            "                    },",
+                            "                    failure: function (response) {",
+                            "                        alert('Not working!');",
+                            "                        console.log(response);",
+                            "                    },",
+                            "     callback: function(successful, data){",
+                            "     alert(data);",
+                            " }",
+                            "               });",
                             "",
                             " Ext.Viewport.setActiveItem('surveypanel',{",
                             "                            type: \"slide\",",

@@ -8,7 +8,8 @@
     "userConfig": {
         "designer|userAlias": "surveypanel",
         "designer|userClassName": "surveyPanel",
-        "id": null
+        "id": "surveyPanel",
+        "style": "background-color: #FFF"
     },
     "designerId": "b7ba1fa6-6778-43e0-a6b4-09767da752c8",
     "cn": [
@@ -34,7 +35,8 @@
                     "userConfig": {
                         "designer|uiInterfaceName": "action-round",
                         "docked": "right",
-                        "text": "sign up",
+                        "id": "signUpBtn",
+                        "text": "Sign up",
                         "ui": "action-round"
                     },
                     "designerId": "a8b85dc4-e270-42f7-9a06-0cd185337a2d",
@@ -75,6 +77,7 @@
                     "userConfig": {
                         "designer|uiInterfaceName": "action-round",
                         "docked": "right",
+                        "id": "signInBtn",
                         "text": "Sign in",
                         "ui": "action-round"
                     },
@@ -105,6 +108,66 @@
                             "designerId": "6e52f4c3-6f12-4d6b-8e70-5b6901990852"
                         }
                     ]
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "action-round",
+                        "docked": "right",
+                        "hidden": true,
+                        "id": "signOutBtn",
+                        "text": "Sign out",
+                        "ui": "action-round"
+                    },
+                    "designerId": "43bb1431-1499-4ca5-958f-64bb1b26a7ee",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "button",
+                                    "e"
+                                ],
+                                "fn": "handler",
+                                "implHandler": [
+                                    "localStorage.setItem('ifLogged', 0);",
+                                    "localStorage.setItem('username','');",
+                                    "console.log('signing out');",
+                                    "Ext.Viewport.setActiveItem('surveypanel',{",
+                                    "                            type: \"slide\",",
+                                    "                            direction: \"left\"",
+                                    "                        });",
+                                    "window.location.reload();"
+                                ]
+                            },
+                            "designerId": "ab4f0118-9a4f-4467-a4b5-c5f69cdafc5e"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "docked": "right",
+                        "hidden": true,
+                        "html": "Hello, username",
+                        "id": "greetingLabel"
+                    },
+                    "designerId": "3ac5b9e5-44da-4d0d-8e43-4ce80fa78b75"
                 }
             ]
         },
@@ -171,7 +234,7 @@
                             "userConfig": {
                                 "docked": "right",
                                 "height": 70,
-                                "src": "Emoticons/emotion_happy.jpg",
+                                "src": "Emoticons/emotion_happy_notext.png",
                                 "width": 50
                             },
                             "designerId": "152a9dd2-89a2-4e31-867d-252be42be5a2"
@@ -448,6 +511,7 @@
                                     "var currentdate = new Date();",
                                     "var timestamp = currentdate.getFullYear() + \"-\"+(currentdate.getMonth()+1)  + \"-\" + currentdate.getDate() + \"%20\"  + currentdate.getHours() + \"-\"  + currentdate.getMinutes() + \"-\" + currentdate.getSeconds();",
                                     "var chosenVenue = Ext.getCmp('venueLblSurvey').getHtml();",
+                                    "chosenVenue = chosenVenue.replace('You are at ','');",
                                     "/*\tgetting feelings' values.",
                                     "*\tif < 0 this is a negative feeling Sad rather than Happy, Angry rather than Peacful etc.",
                                     "*\tfor this we calculate |val| and store it in an array along with all the others.",
@@ -465,13 +529,43 @@
                                     "    feelingsValues=setFeelings(feelingsValues, tempFeelingArray[i]);",
                                     "}",
                                     "console.log(feelingsValues);",
-                                    "Ext.Ajax.request({",
-                                    "    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails?survey='+timestamp+'{=|||||||||=}survey='+chosenVenue+'{=|||||||||=}feeling='+HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX]+'{=|||||||||=}feeling='+SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX]+'{=|||||||||=}feeling='+EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX]+'{=|||||||||=}feeling='+BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX]+'{=|||||||||=}feeling='+SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX]+'{=|||||||||=}feeling='+SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX]+'{=|||||||||=}feeling='+PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX]+'{=|||||||||=}feeling='+ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX]+'',",
-                                    "//    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',",
-                                    "    method: 'GET',",
-                                    "    success: function (response, options) { console.log(response); },",
-                                    "    failure: function (response, options) { console.log('no!');}",
-                                    " });"
+                                    "console.log(chosenVenue);",
+                                    "Ext.data.JsonP.request({",
+                                    "",
+                                    "     url: 'http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',",
+                                    "     params: {",
+                                    "         survey: timestamp,",
+                                    "         survey: chosenVenue,",
+                                    "         feeling: HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX],",
+                                    "         feeling: SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX],",
+                                    "         feeling: EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX],",
+                                    "         feeling: BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX],",
+                                    "         feeling: SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX],",
+                                    "         feeling: SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX],",
+                                    "         feeling: PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX],",
+                                    "         feeling: ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX],",
+                                    "         format: 'json',",
+                                    "         response: 'application/jsonp'",
+                                    "             },",
+                                    "     callbackKey: 'callback',",
+                                    "                    success: function (response) {",
+                                    "                        alert('Working!');",
+                                    "                        console.log(response);",
+                                    "",
+                                    "//                          Ext.Viewport.setActiveItem('surveypanel',{",
+                                    "//                             type: \"slide\",",
+                                    "//                             direction: \"left\"",
+                                    "//                         });",
+                                    "                    },",
+                                    "                    failure: function (response) {",
+                                    "                        alert('Not working!');",
+                                    "                        console.log(response);",
+                                    "                    },",
+                                    "     callback: function(successful, data){",
+                                    "     alert(data);",
+                                    " }",
+                                    "               });",
+                                    ""
                                 ]
                             },
                             "designerId": "88fa7ff4-1c6f-4c5a-b22f-e8c6ec4e9ae6"

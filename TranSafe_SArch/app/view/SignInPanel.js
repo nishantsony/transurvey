@@ -24,6 +24,7 @@ Ext.define('TranSafe.view.SignInPanel', {
     ],
 
     config: {
+        style: 'background-color: #FFF',
         items: [
             {
                 xtype: 'label',
@@ -31,17 +32,18 @@ Ext.define('TranSafe.view.SignInPanel', {
             },
             {
                 xtype: 'textfield',
+                border: 1,
                 id: 'signInUsernameField',
-                label: 'Username',
-                labelAlign: 'right',
-                labelWidth: '35%'
+                padding: 2,
+                style: '\'border-color: blue; border-style: solid;\',',
+                label: 'Login'
             },
             {
                 xtype: 'passwordfield',
+                border: 1,
                 id: 'signInPasswordField',
-                label: 'Password',
-                labelAlign: 'right',
-                labelWidth: '35%'
+                style: '\'border-color: blue; border-style: solid;\',',
+                label: 'Password'
             },
             {
                 xtype: 'button',
@@ -57,12 +59,21 @@ Ext.define('TranSafe.view.SignInPanel', {
                         params: {
                             username: username,
                             pass: pass,
-                            format: 'json'
+                            format: 'json',
+                            response: 'application/jsonp'
                         },
                         callbackKey: 'callback',
                         success: function (response) {
                             alert('Working!');
                             console.log(response);
+                            localStorage.setItem('ifLogged', response['return']);
+                            localStorage.setItem('username', username);
+                            console.log(localStorage.getItem('ifLogged'));
+
+                            Ext.Viewport.setActiveItem('surveypanel',{
+                                type: "slide",
+                                direction: "left"
+                            });
                         },
                         failure: function (response) {
                             alert('Not working!');
@@ -73,10 +84,6 @@ Ext.define('TranSafe.view.SignInPanel', {
                         }
                     });
 
-                    Ext.Viewport.setActiveItem('surveypanel',{
-                        type: "slide",
-                        direction: "left"
-                    });
                 },
                 docked: 'bottom',
                 ui: 'action-round',

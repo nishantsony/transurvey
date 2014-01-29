@@ -14,7 +14,8 @@
         "html": "<h1>Welcome to TranSafe</h1><p>Synopsis</p><h2>TranSafe (0.0.1)</h2>",
         "requires": [
             "TranSafe.view.MyNavigationView"
-        ]
+        ],
+        "style": "background-color: #FFF"
     },
     "designerId": "407dbdf7-4c2d-4fcb-a2a5-e9c236cc6fca",
     "cn": [
@@ -74,6 +75,7 @@
                                 "fn": "handler",
                                 "implHandler": [
                                     "        //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));",
+                                    "        console.log('The user is ' + localStorage.getItem('ifLogged'));",
                                     "        Ext.Viewport.setActiveItem('mynavigationview',{",
                                     "                            type: \"slide\",",
                                     "                            direction: \"left\"",

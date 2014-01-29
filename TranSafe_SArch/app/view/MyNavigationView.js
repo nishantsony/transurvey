@@ -26,6 +26,7 @@ Ext.define('TranSafe.view.MyNavigationView', {
     ],
 
     config: {
+        style: 'background-color: #FFF',
         items: [
             {
                 xtype: 'container',

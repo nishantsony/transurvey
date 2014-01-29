@@ -27,6 +27,7 @@ Ext.define('TranSafe.view.SignUpPanel', {
 
     config: {
         id: 'signinpanel',
+        style: 'background-color: #FFF',
         items: [
             {
                 xtype: 'label',
@@ -35,17 +36,17 @@ Ext.define('TranSafe.view.SignUpPanel', {
             },
             {
                 xtype: 'textfield',
+                border: 1,
                 id: 'signUpUsernameField',
-                label: 'Username',
-                labelAlign: 'right',
-                labelWidth: '35%'
+                style: '\'border-color: blue; border-style: solid;\',',
+                label: 'Login'
             },
             {
                 xtype: 'passwordfield',
+                border: 1,
                 id: 'signUpPasswordField',
-                label: 'Password',
-                labelAlign: 'right',
-                labelWidth: '35%'
+                style: '\'border-color: blue; border-style: solid;\',',
+                label: 'Password'
             },
             {
                 xtype: 'label',
@@ -53,9 +54,11 @@ Ext.define('TranSafe.view.SignUpPanel', {
             },
             {
                 xtype: 'textfield',
+                border: 1,
                 id: 'emailField',
-                label: 'Email',
-                labelWidth: '40%'
+                padding: '',
+                style: '\'border-color: blue; border-style: solid;\'',
+                label: 'Email'
             },
             {
                 xtype: 'container',
@@ -63,6 +66,7 @@ Ext.define('TranSafe.view.SignUpPanel', {
                     {
                         xtype: 'radiofield',
                         docked: 'left',
+                        minWidth: '50%',
                         label: 'Male',
                         labelWidth: '60%',
                         name: 'gender',
@@ -72,9 +76,11 @@ Ext.define('TranSafe.view.SignUpPanel', {
                         xtype: 'radiofield',
                         centered: false,
                         docked: 'right',
+                        minWidth: '50%',
                         label: 'Female',
                         labelAlign: 'right',
-                        labelWidth: '60%',
+                        labelWidth: '40%',
+                        labelWrap: true,
                         name: 'gender',
                         value: 'female'
                     }
@@ -82,26 +88,62 @@ Ext.define('TranSafe.view.SignUpPanel', {
             },
             {
                 xtype: 'textfield',
+                border: 1,
                 id: 'ageField',
+                padding: '',
+                style: '\'border-color: blue; border-style: solid;\',',
                 label: 'Age',
-                labelWidth: '40%',
                 ui: 'number'
             },
             {
                 xtype: 'textfield',
+                border: 1,
                 id: 'occupationField',
-                label: 'Occupation',
-                labelWidth: '40%'
+                style: '\'border-color: blue; border-style: solid;\',',
+                label: 'Role'
             },
             {
                 xtype: 'button',
                 handler: function(button, e) {
-                    console.log('Username: ' + Ext.getCmp('signUpUsernameField').getValue());
-                    console.log('Password: ' + Ext.getCmp('signUpPasswordField').getValue());
-                    console.log('email: ' + Ext.getCmp('emailField').getValue());
-                    console.log('age: ' + Ext.getCmp('ageField').getValue());
-                    console.log('occupation: ' + Ext.getCmp('occupationField').getValue());
-                    console.log('gender: ' + Ext.ComponentQuery.query('radiofield[name=gender]'));
+                    var login = Ext.getCmp('signUpUsernameField').getValue();
+                    var pass = Ext.getCmp('signUpPasswordField').getValue();
+                    var email = Ext.getCmp('emailField').getValue();
+                    var gender = Ext.ComponentQuery.query('radiofield[name=gender]')[0].getGroupValue();
+                    var age = Ext.getCmp('ageField').getValue();
+                    var role = Ext.getCmp('occupationField').getValue();
+                    console.log('Username: ' + login);
+                    console.log('Password: ' + pass);
+                    console.log('email: ' + email);
+                    console.log('age: ' + age);
+                    console.log('occupation: ' + role);
+                    console.log('gender: ' + gender);
+
+                    Ext.data.JsonP.request({
+
+                        url: 'http://115.146.86.216:8080/TransNet/services/SurveyBO/CreateUser',
+                        params: {
+                            format: 'json',
+                            response: 'application/jsonp',
+                            userdetails: login,
+                            userdetails: pass,
+                            userdetails: email,
+                            userdetails: gender,
+                            userdetails: age,
+                            userdetails: role
+                        },
+                        callbackKey: 'callback',
+                        success: function (response) {
+                            alert('Working!');
+                            console.log(response);
+                        },
+                        failure: function (response) {
+                            alert('Not working!');
+                            console.log(response);
+                        },
+                        callback: function(successful, data){
+                            alert(data);
+                        }
+                    });
 
                     Ext.Viewport.setActiveItem('surveypanel',{
                         type: "slide",

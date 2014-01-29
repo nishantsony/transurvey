@@ -26,6 +26,7 @@ Ext.define('TranSafe.view.MyPanel', {
     config: {
         cls: 'home',
         html: '<h1>Welcome to TranSafe</h1><p>Synopsis</p><h2>TranSafe (0.0.1)</h2>',
+        style: 'background-color: #FFF',
         items: [
             {
                 xtype: 'image',
@@ -40,6 +41,7 @@ Ext.define('TranSafe.view.MyPanel', {
                         xtype: 'button',
                         handler: function(button, e) {
                             //Ext.Viewport.add(Ext.create('TranSafe.view.MyNavigationView'));
+                            console.log('The user is ' + localStorage.getItem('ifLogged'));
                             Ext.Viewport.setActiveItem('mynavigationview',{
                                 type: "slide",
                                 direction: "left"

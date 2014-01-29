@@ -26,6 +26,8 @@ Ext.define('TranSafe.view.surveyPanel', {
     ],
 
     config: {
+        id: 'surveyPanel',
+        style: 'background-color: #FFF',
         items: [
             {
                 xtype: 'container',
@@ -42,8 +44,9 @@ Ext.define('TranSafe.view.surveyPanel', {
 
                         },
                         docked: 'right',
+                        id: 'signUpBtn',
                         ui: 'action-round',
-                        text: 'sign up'
+                        text: 'Sign up'
                     },
                     {
                         xtype: 'button',
@@ -56,8 +59,34 @@ Ext.define('TranSafe.view.surveyPanel', {
 
                         },
                         docked: 'right',
+                        id: 'signInBtn',
                         ui: 'action-round',
                         text: 'Sign in'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            localStorage.setItem('ifLogged', 0);
+                            localStorage.setItem('username','');
+                            console.log('signing out');
+                            Ext.Viewport.setActiveItem('surveypanel',{
+                                type: "slide",
+                                direction: "left"
+                            });
+                            window.location.reload();
+                        },
+                        docked: 'right',
+                        hidden: true,
+                        id: 'signOutBtn',
+                        ui: 'action-round',
+                        text: 'Sign out'
+                    },
+                    {
+                        xtype: 'label',
+                        docked: 'right',
+                        hidden: true,
+                        html: 'Hello, username',
+                        id: 'greetingLabel'
                     }
                 ]
             },
@@ -87,7 +116,7 @@ Ext.define('TranSafe.view.surveyPanel', {
                                 docked: 'right',
                                 height: 70,
                                 width: 50,
-                                src: 'Emoticons/emotion_happy.jpg'
+                                src: 'Emoticons/emotion_happy_notext.png'
                             },
                             {
                                 xtype: 'sliderfield',
@@ -220,6 +249,7 @@ Ext.define('TranSafe.view.surveyPanel', {
                             var currentdate = new Date();
                             var timestamp = currentdate.getFullYear() + "-"+(currentdate.getMonth()+1)  + "-" + currentdate.getDate() + "%20"  + currentdate.getHours() + "-"  + currentdate.getMinutes() + "-" + currentdate.getSeconds();
                             var chosenVenue = Ext.getCmp('venueLblSurvey').getHtml();
+                            chosenVenue = chosenVenue.replace('You are at ','');
                             /*	getting feelings' values.
                             *	if < 0 this is a negative feeling Sad rather than Happy, Angry rather than Peacful etc.
                             *	for this we calculate |val| and store it in an array along with all the others.
@@ -237,13 +267,43 @@ Ext.define('TranSafe.view.surveyPanel', {
                                 feelingsValues=setFeelings(feelingsValues, tempFeelingArray[i]);
                             }
                             console.log(feelingsValues);
-                            Ext.Ajax.request({
-                                url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails?survey='+timestamp+'{=|||||||||=}survey='+chosenVenue+'{=|||||||||=}feeling='+HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX]+'{=|||||||||=}feeling='+SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX]+'{=|||||||||=}feeling='+EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX]+'{=|||||||||=}feeling='+BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX]+'{=|||||||||=}feeling='+SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX]+'{=|||||||||=}feeling='+SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX]+'{=|||||||||=}feeling='+PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX]+'{=|||||||||=}feeling='+ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX]+'',
-                                //    url: 'proxy.php?url=http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',
-                                method: 'GET',
-                                success: function (response, options) { console.log(response); },
-                                failure: function (response, options) { console.log('no!');}
+                            console.log(chosenVenue);
+                            Ext.data.JsonP.request({
+
+                                url: 'http://115.146.86.216:8080/TransNet/services/SurveyBO/SaveSurverWithoutPersonalDetails',
+                                params: {
+                                    survey: timestamp,
+                                    survey: chosenVenue,
+                                    feeling: HAPPY_TO_SERVER()+'|'+feelingsValues[HAPPY_INDEX],
+                                    feeling: SAD_TO_SERVER()+'|'+feelingsValues[SAD_INDEX],
+                                    feeling: EXCITED_TO_SERVER()+'|'+feelingsValues[EXCITED_INDEX],
+                                    feeling: BORED_TO_SERVER()+'|'+feelingsValues[BORED_INDEX],
+                                    feeling: SAFE_TO_SERVER()+'|'+feelingsValues[SAFE_INDEX],
+                                    feeling: SCARED_TO_SERVER()+'|'+feelingsValues[SCARED_INDEX],
+                                    feeling: PEACEFUL_TO_SERVER()+'|'+feelingsValues[PEACEFUL_INDEX],
+                                    feeling: ANGRY_TO_SERVER()+'|'+feelingsValues[ANGRY_INDEX],
+                                    format: 'json',
+                                    response: 'application/jsonp'
+                                },
+                                callbackKey: 'callback',
+                                success: function (response) {
+                                    alert('Working!');
+                                    console.log(response);
+
+                                    //                          Ext.Viewport.setActiveItem('surveypanel',{
+                                    //                             type: "slide",
+                                    //                             direction: "left"
+                                    //                         });
+                                },
+                                failure: function (response) {
+                                    alert('Not working!');
+                                    console.log(response);
+                                },
+                                callback: function(successful, data){
+                                    alert(data);
+                                }
                             });
+
                         },
                         docked: 'bottom',
                         itemId: 'mybutton2',

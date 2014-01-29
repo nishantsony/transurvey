@@ -19,12 +19,22 @@ Ext.define('TranSafe.controller.MyController', {
     config: {
         refs: {
             venueLblSurvey: 'label#venueLblSurvey',
-            surveyPanel: 'panel#mypanel1'
+            surveyPanel: 'panel#surveyPanel',
+            greetingLabel: 'label#greetingLabel',
+            signInBtn: 'button#signInBtn',
+            signUpBtn: 'button#signUpBtn',
+            signOutBtn: 'button#signOutBtn'
         },
 
         control: {
             "list": {
                 itemtap: 'onListItemTap'
+            },
+            "panel": {
+                activate: 'onPanelActivate'
+            },
+            "#surveyPanel": {
+                activate: 'onSurveyPanelActivate'
             }
         }
     },
@@ -35,7 +45,50 @@ Ext.define('TranSafe.controller.MyController', {
                                     type: "slide",
                                     direction: "left"
                                 });
-        console.log(this.getVenueLblSurvey().setHtml(record.get('name')));
+        console.log(this.getVenueLblSurvey().setHtml('You are at ' + record.get('name')));
+    },
+
+    onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        // console.log('logged status is: ' + localStorage.getItem('ifLogged'));
+        // if(localStorage.getItem('ifLogged') == 1){
+        //     var username = localStorage.getItem('username');
+        //     console.log('name: ' + username);
+        //     this.getGreetingLabel().setHtml('Hello, ' + username);
+        //     this.getGreetingLabel().show();
+        //     this.getSignOutBtn().show();
+        //     this.getSignInBtn().hide();
+        //     this.getSignUpBtn().hide();
+        // }
+        // else{
+        //     if(localStorage.getItem('ifLogged') === 0){
+        //     this.getGreetingLabel().hide();
+        //     this.getSignOutBtn().hide();
+        //     this.getSignInBtn().show();
+        //     this.getSignUpBtn().show();
+        //     }
+        // }
+    },
+
+    onSurveyPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        console.log('Survey panel activated');
+        console.log('logged status is: ' + localStorage.getItem('ifLogged'));
+        if(localStorage.getItem('ifLogged') == 1){
+            var username = localStorage.getItem('username');
+            console.log('name: ' + username);
+            this.getGreetingLabel().setHtml('Hello, ' + username);
+            this.getGreetingLabel().show();
+            this.getSignOutBtn().show();
+            this.getSignInBtn().hide();
+            this.getSignUpBtn().hide();
+        }
+        else{
+            if(localStorage.getItem('ifLogged') === 0){
+            this.getGreetingLabel().hide();
+            this.getSignOutBtn().hide();
+            this.getSignInBtn().show();
+            this.getSignUpBtn().show();
+            }
+        }
     }
 
 });
